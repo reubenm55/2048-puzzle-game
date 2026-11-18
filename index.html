@@ -2,23 +2,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#111827">
-  <title>2048 Puzzle Game</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101827">
+<title>2048 - Number Puzzle</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg,#101827,#202e49);
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 430px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  font-size: 48px;
+  margin: 0;
+  color: #fbbf24;
+}
+
+.subtitle {
+  color: #cbd5e1;
+  margin-top: 5px;
+}
+
+.scores {
+  display: flex;
+  gap: 10px;
+  margin: 25px 0;
+}
+
+.score-box {
+  flex: 1;
+  background: #26354d;
+  padding: 14px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.score-box small {
+  color: #94a3b8;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.score-box strong {
+  font-size: 24px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+button {
+  border: none;
+  background: #f59e0b;
+  color: #111827;
+  font-weight: bold;
+  padding: 12px 18px;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #fbbf24;
+}
+
+#game-board {
+  width: 100%;
+  aspect-ratio: 1;
+  background: #334155;
+  padding: 10px;
+  border-radius: 14px;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-template-rows: repeat(4,1fr);
+  gap: 9px;
+}
+
+.tile {
+  border-radius: 9px;
+  background: #475569;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: clamp(22px,7vw,34px);
+  font-weight: bold;
+  color: #1e293b;
+}
+
+.tile-2 {background:#e2e8f0;}
+.tile-4 {background:#cbd5e1;}
+.tile-8 {background:#fbbf24;}
+.tile-16 {background:#fb923c;}
+.tile-32 {background:#f97316;color:white;}
+.tile-64 {background:#ef4444;color:white;}
+.tile-128 {background:#a78bfa;}
+.tile-256 {background:#8b5cf6;color:white;}
+.tile-512 {background:#6366f1;color:white;}
+.tile-1024 {background:#2563eb;color:white;}
+.tile-2048 {background:#16a34a;color:white;}
+
+.instructions {
+  text-align: center;
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin-top: 22px;
+  font-size: 14px;
+}
+
+@media(max-width:380px) {
+  .tile {font-size: 23px;}
+  #game-board {gap:6px;padding:7px;}
+}
+</style>
 </head>
+
 <body>
+<div class="container">
 
-  <h1>2048</h1>
-  <p>Join the numbers and reach 2048!</p>
+  <div class="header">
+    <div>
+      <h1>2048</h1>
+      <div class="subtitle">Number Puzzle Challenge</div>
+    </div>
+    <div>🧩</div>
+  </div>
 
-  <h2>Score: 0</h2>
+  <div class="scores">
+    <div class="score-box">
+      <small>SCORE</small>
+      <strong>0</strong>
+    </div>
+    <div class="score-box">
+      <small>BEST</small>
+      <strong>0</strong>
+    </div>
+  </div>
 
-  <div id="game-board"></div>
+  <div class="controls">
+    <span>Join the numbers!</span>
+    <button>New Game</button>
+  </div>
 
-  <button onclick="alert('Game starting soon!')">
-    New Game
-  </button>
+  <div id="game-board">
+    <div class="tile tile-2">2</div>
+    <div class="tile"></div>
+    <div class="tile tile-4">4</div>
+    <div class="tile"></div>
 
+    <div class="tile"></div>
+    <div class="tile tile-2">2</div>
+    <div class="tile"></div>
+    <div class="tile"></div>
+
+    <div class="tile tile-4">4</div>
+    <div class="tile"></div>
+    <div class="tile"></div>
+    <div class="tile tile-2">2</div>
+
+    <div class="tile"></div>
+    <div class="tile"></div>
+    <div class="tile tile-2">2</div>
+    <div class="tile"></div>
+  </div>
+
+  <div class="instructions">
+    Use your keyboard arrow keys to move the tiles.<br>
+    On mobile, swipe in any direction.<br>
+    Combine matching numbers to reach 2048!
+  </div>
+
+</div>
 </body>
 </html>
