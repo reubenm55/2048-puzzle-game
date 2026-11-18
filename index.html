@@ -8,134 +8,81 @@
 <title>2048 - Number Puzzle</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* {box-sizing:border-box}
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  background: linear-gradient(135deg,#101827,#202e49);
-  color: white;
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+ margin:0;
+ min-height:100vh;
+ background:linear-gradient(135deg,#101827,#202e49);
+ color:white;
+ font-family:Arial,sans-serif;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ padding:20px;
 }
 
-.container {
-  width: 100%;
-  max-width: 430px;
-}
+.container {width:100%;max-width:430px}
+.header {display:flex;justify-content:space-between;align-items:center}
+h1 {font-size:48px;margin:0;color:#fbbf24}
+.subtitle {color:#cbd5e1;margin-top:5px}
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-h1 {
-  font-size: 48px;
-  margin: 0;
-  color: #fbbf24;
-}
-
-.subtitle {
-  color: #cbd5e1;
-  margin-top: 5px;
-}
-
-.scores {
-  display: flex;
-  gap: 10px;
-  margin: 25px 0;
-}
-
+.scores {display:flex;gap:10px;margin:25px 0}
 .score-box {
-  flex: 1;
-  background: #26354d;
-  padding: 14px;
-  border-radius: 12px;
-  text-align: center;
+ flex:1;background:#26354d;padding:14px;
+ border-radius:12px;text-align:center
 }
+.score-box small {color:#94a3b8;display:block;margin-bottom:6px}
+.score-box strong {font-size:24px}
 
-.score-box small {
-  color: #94a3b8;
-  display: block;
-  margin-bottom: 6px;
-}
-
-.score-box strong {
-  font-size: 24px;
-}
-
-.controls {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
-}
+.controls {display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
 
 button {
-  border: none;
-  background: #f59e0b;
-  color: #111827;
-  font-weight: bold;
-  padding: 12px 18px;
-  border-radius: 9px;
-  cursor: pointer;
+ border:none;background:#f59e0b;color:#111827;
+ font-weight:bold;padding:12px 18px;border-radius:9px;
+ cursor:pointer
 }
-
-button:hover {
-  background: #fbbf24;
-}
+button:hover {background:#fbbf24}
 
 #game-board {
-  width: 100%;
-  aspect-ratio: 1;
-  background: #334155;
-  padding: 10px;
-  border-radius: 14px;
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  grid-template-rows: repeat(4,1fr);
-  gap: 9px;
+ width:100%;aspect-ratio:1;background:#334155;
+ padding:10px;border-radius:14px;display:grid;
+ grid-template-columns:repeat(4,1fr);
+ grid-template-rows:repeat(4,1fr);gap:9px;
+ touch-action:none
 }
 
 .tile {
-  border-radius: 9px;
-  background: #475569;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: clamp(22px,7vw,34px);
-  font-weight: bold;
-  color: #1e293b;
+ border-radius:9px;background:#475569;
+ display:flex;justify-content:center;align-items:center;
+ font-size:clamp(22px,7vw,34px);
+ font-weight:bold;color:#1e293b
 }
 
-.tile-2 {background:#e2e8f0;}
-.tile-4 {background:#cbd5e1;}
-.tile-8 {background:#fbbf24;}
-.tile-16 {background:#fb923c;}
-.tile-32 {background:#f97316;color:white;}
-.tile-64 {background:#ef4444;color:white;}
-.tile-128 {background:#a78bfa;}
-.tile-256 {background:#8b5cf6;color:white;}
-.tile-512 {background:#6366f1;color:white;}
-.tile-1024 {background:#2563eb;color:white;}
-.tile-2048 {background:#16a34a;color:white;}
+.tile-2{background:#e2e8f0}
+.tile-4{background:#cbd5e1}
+.tile-8{background:#fbbf24}
+.tile-16{background:#fb923c}
+.tile-32{background:#f97316;color:white}
+.tile-64{background:#ef4444;color:white}
+.tile-128{background:#a78bfa}
+.tile-256{background:#8b5cf6;color:white}
+.tile-512{background:#6366f1;color:white}
+.tile-1024{background:#2563eb;color:white}
+.tile-2048{background:#16a34a;color:white}
+.tile-high{background:#0f766e;color:white}
 
-.instructions {
-  text-align: center;
-  color: #cbd5e1;
-  line-height: 1.6;
-  margin-top: 22px;
-  font-size: 14px;
+.instructions{text-align:center;color:#cbd5e1;line-height:1.6;margin-top:22px;font-size:14px}
+
+.message {
+ display:none;text-align:center;margin-top:15px;
+ padding:12px;background:#26354d;border-radius:10px;
 }
+.message button{margin-top:8px}
 
 @media(max-width:380px) {
-  .tile {font-size: 23px;}
-  #game-board {gap:6px;padding:7px;}
+ .tile{font-size:23px}
+ #game-board{gap:6px;padding:7px}
 }
 </style>
 </head>
@@ -143,58 +90,235 @@ button:hover {
 <body>
 <div class="container">
 
-  <div class="header">
-    <div>
-      <h1>2048</h1>
-      <div class="subtitle">Number Puzzle Challenge</div>
-    </div>
-    <div>🧩</div>
+ <div class="header">
+  <div>
+   <h1>2048</h1>
+   <div class="subtitle">Number Puzzle Challenge</div>
   </div>
+  <div style="font-size:35px">🧩</div>
+ </div>
 
-  <div class="scores">
-    <div class="score-box">
-      <small>SCORE</small>
-      <strong>0</strong>
-    </div>
-    <div class="score-box">
-      <small>BEST</small>
-      <strong>0</strong>
-    </div>
+ <div class="scores">
+  <div class="score-box">
+   <small>SCORE</small>
+   <strong id="score">0</strong>
   </div>
-
-  <div class="controls">
-    <span>Join the numbers!</span>
-    <button>New Game</button>
+  <div class="score-box">
+   <small>BEST</small>
+   <strong id="best">0</strong>
   </div>
+ </div>
 
-  <div id="game-board">
-    <div class="tile tile-2">2</div>
-    <div class="tile"></div>
-    <div class="tile tile-4">4</div>
-    <div class="tile"></div>
+ <div class="controls">
+  <span>Join the numbers!</span>
+  <button onclick="newGame()">New Game ↻</button>
+ </div>
 
-    <div class="tile"></div>
-    <div class="tile tile-2">2</div>
-    <div class="tile"></div>
-    <div class="tile"></div>
+ <div id="game-board"></div>
 
-    <div class="tile tile-4">4</div>
-    <div class="tile"></div>
-    <div class="tile"></div>
-    <div class="tile tile-2">2</div>
+ <div id="message" class="message"></div>
 
-    <div class="tile"></div>
-    <div class="tile"></div>
-    <div class="tile tile-2">2</div>
-    <div class="tile"></div>
-  </div>
-
-  <div class="instructions">
-    Use your keyboard arrow keys to move the tiles.<br>
-    On mobile, swipe in any direction.<br>
-    Combine matching numbers to reach 2048!
-  </div>
+ <div class="instructions">
+  ⌨️ Use arrow keys to move tiles.<br>
+  📱 Swipe on your phone to play.<br>
+  Combine matching numbers to reach 2048!
+ </div>
 
 </div>
+
+<script>
+const boardElement = document.getElementById("game-board");
+const scoreElement = document.getElementById("score");
+const bestElement = document.getElementById("best");
+const messageElement = document.getElementById("message");
+
+let board = [];
+let score = 0;
+let best = 0;
+let won = false;
+let gameOver = false;
+
+try {
+ best = Number(localStorage.getItem("2048-best")) || 0;
+} catch(e) {}
+
+function updateScores() {
+ scoreElement.textContent = score;
+ bestElement.textContent = best;
+}
+
+function saveBest() {
+ if(score > best) {
+  best = score;
+  try { localStorage.setItem("2048-best",best); } catch(e) {}
+ }
+ updateScores();
+}
+
+function drawBoard() {
+ boardElement.innerHTML = "";
+
+ for(let i=0;i<16;i++) {
+  const tile = document.createElement("div");
+  tile.className = "tile";
+
+  const value = board[i];
+
+  if(value) {
+   tile.textContent = value;
+   tile.classList.add(value <= 2048 ? "tile-"+value : "tile-high");
+  }
+
+  boardElement.appendChild(tile);
+ }
+
+ updateScores();
+}
+
+function addTile() {
+ const empty = [];
+
+ board.forEach((value,index)=>{
+  if(value===0) empty.push(index);
+ });
+
+ if(empty.length===0) return;
+
+ const position = empty[Math.floor(Math.random()*empty.length)];
+ board[position] = Math.random()<0.9 ? 2 : 4;
+}
+
+function newGame() {
+ board = Array(16).fill(0);
+ score = 0;
+ won = false;
+ gameOver = false;
+ messageElement.style.display="none";
+
+ addTile();
+ addTile();
+ drawBoard();
+}
+
+function move(direction) {
+ if(gameOver) return;
+
+ let moved = false;
+ let gained = 0;
+ const oldBoard = [...board];
+
+ for(let line=0;line<4;line++) {
+  let indexes = [];
+
+  for(let n=0;n<4;n++) {
+   if(direction==="left") indexes.push(line*4+n);
+   if(direction==="right") indexes.push(line*4+(3-n));
+   if(direction==="up") indexes.push(n*4+line);
+   if(direction==="down") indexes.push((3-n)*4+line);
+  }
+
+  let values = indexes.map(i=>board[i]).filter(v=>v!==0);
+
+  for(let i=0;i<values.length-1;i++) {
+   if(values[i]===values[i+1]) {
+    values[i]*=2;
+    gained+=values[i];
+    values.splice(i+1,1);
+   }
+  }
+
+  while(values.length<4) values.push(0);
+
+  indexes.forEach((index,i)=>{
+   board[index]=values[i];
+  });
+ }
+
+ moved = board.some((v,i)=>v!==oldBoard[i]);
+
+ if(!moved) return;
+
+ score+=gained;
+ saveBest();
+ addTile();
+ drawBoard();
+
+ if(!won && board.includes(2048)) {
+  won=true;
+  showMessage("🎉 Congratulations! You reached 2048!");
+ }
+
+ if(!canMove()) {
+  gameOver=true;
+  showMessage("Game Over! No more moves available.");
+ }
+}
+
+function canMove() {
+ if(board.includes(0)) return true;
+
+ for(let r=0;r<4;r++) {
+  for(let c=0;c<4;c++) {
+   const i=r*4+c;
+   if(c<3 && board[i]===board[i+1]) return true;
+   if(r<3 && board[i]===board[i+4]) return true;
+  }
+ }
+ return false;
+}
+
+function showMessage(text) {
+ messageElement.innerHTML="";
+ const label=document.createElement("div");
+ label.textContent=text;
+ messageElement.appendChild(label);
+
+ const button=document.createElement("button");
+ button.textContent="Play Again";
+ button.onclick=newGame;
+ messageElement.appendChild(button);
+
+ messageElement.style.display="block";
+}
+
+document.addEventListener("keydown",function(e) {
+ const keys={
+  ArrowLeft:"left",
+  ArrowRight:"right",
+  ArrowUp:"up",
+  ArrowDown:"down"
+ };
+
+ if(keys[e.key]) {
+  e.preventDefault();
+  move(keys[e.key]);
+ }
+});
+
+let startX=0;
+let startY=0;
+
+boardElement.addEventListener("touchstart",function(e) {
+ const touch=e.changedTouches[0];
+ startX=touch.clientX;
+ startY=touch.clientY;
+},{passive:true});
+
+boardElement.addEventListener("touchend",function(e) {
+ const touch=e.changedTouches[0];
+ const dx=touch.clientX-startX;
+ const dy=touch.clientY-startY;
+
+ if(Math.max(Math.abs(dx),Math.abs(dy))<25) return;
+
+ if(Math.abs(dx)>Math.abs(dy)) {
+  move(dx>0?"right":"left");
+ } else {
+  move(dy>0?"down":"up");
+ }
+},{passive:true});
+
+newGame();
+</script>
 </body>
 </html>
